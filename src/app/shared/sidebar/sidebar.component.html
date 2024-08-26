@@ -1,0 +1,26 @@
+<mat-drawer-container class="mat-drawer-container" autosize>
+    <mat-drawer #drawer class="sidenav" [opened]="true" mode="side">
+        <div class="logo-container">PLATZ FÜR LOGO</div>
+        <ul>
+            <li>
+                <mat-icon>space_dashboard</mat-icon><p class="icon-text">Dashboard</p>
+            </li>
+            <li>
+                <mat-icon>person_outline</mat-icon><p class="icon-text">User</p>
+            </li>
+        </ul>    
+    </mat-drawer>
+    
+
+    <div class="sidenav-content">
+        <mat-toolbar color="primary">
+            <mat-toolbar-row>
+                <button mat-icon-button class="menu-icon" aria-label="Example icon-button with menu icon" type="button" (click)="drawer.toggle()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <span>Simple CRM</span>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </div>
+
+</mat-drawer-container>
