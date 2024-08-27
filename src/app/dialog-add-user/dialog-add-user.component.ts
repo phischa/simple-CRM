@@ -1,5 +1,7 @@
-import { Component, inject, } from '@angular/core';
+import { Component, inject, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -7,16 +9,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, DateAdapter, NativeDateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 import { Firestore, collection, collectionData, addDoc, onSnapshot } from '@angular/fire/firestore';
 import { User } from '../../models/user.class';
 
-// Define the default date formats
 export const MY_DATE_FORMATS = {
   parse: {
-    dateInput: 'DD/MM/YYYY', // Adjust this format as needed
+    dateInput: 'DD/MM/YYYY',
   },
   display: {
-    dateInput: 'DD/MM/YYYY', // Adjust this format as needed
+    dateInput: 'DD/MM/YYYY',
     monthYearLabel: 'MMM YYYY',
     dateA11yLabel: 'LL',
     monthYearA11yLabel: 'MMMM YYYY',
@@ -27,6 +30,7 @@ export const MY_DATE_FORMATS = {
   selector: 'app-dialog-add-user',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     MatDialogModule,
     MatButtonModule,
@@ -35,6 +39,7 @@ export const MY_DATE_FORMATS = {
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressBarModule,
   ],
   templateUrl: './dialog-add-user.component.html',
   styleUrls: ['./dialog-add-user.component.scss'],
@@ -49,10 +54,12 @@ export class DialogAddUserComponent {
   users: any;
   users$: any;
   birthDate!: Date;
+  loading: boolean;
 
   firestore: Firestore = inject(Firestore);
 
   constructor() {
+    this.loading = false;
     this.users$ = collectionData(this.getUsersRef())
     this.users = this.users$.subscribe((user: any) => {
       console.log('user update', user);
@@ -66,11 +73,14 @@ export class DialogAddUserComponent {
   async saveUser() {
     this.user.birthDate = this.birthDate.getTime();
     console.log('Current user is: ', this.user);
-    return await addDoc(this.getUsersRef(), this.user.toJSON()).catch(
-      (err) => { console.error(err) }
-    ).then(
-
-    )
+    this.loading = true;
+    try {
+      await addDoc(this.getUsersRef(), this.user.toJSON());
+    } catch (err) {
+      console.error(err);
+    } finally {
+      this.loading = false;
+    }
   }
 }
 

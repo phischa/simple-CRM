@@ -1,16 +1,17 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 <h1 mat-dialog-title>Add User<!-- {{data.name}} --></h1>
 <div class="mat-dialog-container">
     <div class="mat-dialog-names">
         <div mat-dialog-content>
             <mat-form-field class="form" appearance="outline">
                 <mat-label>First Name</mat-label>
-                <input [(ngModel)]="user.firstName" matInput>
+                <input [disabled]="loading" [(ngModel)]="user.firstName" matInput>
             </mat-form-field>
         </div>
         <div class="lastname-field" mat-dialog-content>
             <mat-form-field class="form" appearance="outline">
                 <mat-label> Last Name</mat-label>
-                <input [(ngModel)]="user.lastName" matInput>
+                <input [disabled]="loading" [(ngModel)]="user.lastName" matInput>
             </mat-form-field>
         </div>
     </div>
@@ -18,7 +19,7 @@
     <div class="padding-0-24">
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Birth date</mat-label>
-            <input [(ngModel)]="birthDate" matInput [matDatepicker]="picker">
+            <input [disabled]="loading" [(ngModel)]="birthDate" matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -27,7 +28,7 @@
     <div class="padding-0-24">
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Address</mat-label>
-            <input [(ngModel)]="user.address" matInput>
+            <input [disabled]="loading" [(ngModel)]="user.address" matInput>
         </mat-form-field>
     </div>
 
@@ -35,13 +36,13 @@
         <div class="postal-code">
             <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Postal Code</mat-label>
-                <input [(ngModel)]="user.postalCode" matInput>
+                <input [disabled]="loading" [(ngModel)]="user.postalCode" matInput>
             </mat-form-field>
         </div>
         <div class="city">
             <mat-form-field appearance="outline" class="full-width">
                 <mat-label>City</mat-label>
-                <input [(ngModel)]="user.city" matInput>
+                <input [disabled]="loading" [(ngModel)]="user.city" matInput>
             </mat-form-field>
         </div>
     </div>
@@ -49,6 +50,6 @@
 
 </div>
 <div class="mat-dialog-actions" mat-dialog-actions>
-    <button mat-button>Cancel</button>
-    <button mat-button (click)="saveUser()" cdkFocusInitial>Save</button>
+    <button [disabled]="loading" mat-button>Cancel</button>
+    <button [disabled]="loading" mat-button (click)="saveUser()" cdkFocusInitial>Save</button>
 </div>
