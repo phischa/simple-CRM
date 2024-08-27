@@ -5,8 +5,15 @@
     flex-wrap: wrap;
 }
 
-.lastname-field {
+.first-name-field {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.last-name-field {
     padding-left: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .form {
@@ -31,7 +38,6 @@
         padding: 0 24px 0 0;
     }
 }
-
 
 .mat-dialog-actions {
     padding-left: 24px;
