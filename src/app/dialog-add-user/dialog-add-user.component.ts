@@ -58,7 +58,7 @@ export class DialogAddUserComponent {
 
   firestore: Firestore = inject(Firestore);
 
-  constructor(private dialogRef: MatDialogRef<DialogAddUserComponent>) {
+  constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>) {
     this.loading = false;
     this.users$ = collectionData(this.getUsersRef())
     this.users = this.users$.subscribe((user: any) => {
@@ -84,8 +84,5 @@ export class DialogAddUserComponent {
     }
   }
 
-  closeCard() {
-    this.dialogRef.close();
-  }
 }
 

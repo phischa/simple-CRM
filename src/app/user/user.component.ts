@@ -1,5 +1,7 @@
 import { Component, inject, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router'; 
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
@@ -14,7 +16,7 @@ import { User } from '../../models/user.class';
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [ CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatTooltipModule, MatCardModule ],
+  imports: [ RouterModule, CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatTooltipModule, MatCardModule ],
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'] // Corrected from styleUrl to styleUrls
 })
@@ -25,8 +27,8 @@ export class UserComponent {
 
   firestore: Firestore = inject(Firestore);
 
-  constructor(public dialog: MatDialog) {
-    this.users$ = collectionData(this.getUsersRef());
+  constructor(public dialog: MatDialog, private router: Router) {
+    this.users$ = collectionData(this.getUsersRef(), { idField: 'id' });
     this.users = this.users$.subscribe((changes: User []) => {
       console.log('Received changes from DB', changes);
       this.allUsers = changes;
@@ -40,4 +42,8 @@ export class UserComponent {
   openDialog() {
     this.dialog.open(DialogAddUserComponent);
   }
+
+  /* navigateToUser(id: string) {
+    this.router.navigate(['/user', alUsers.id]);
+  } */
 }
