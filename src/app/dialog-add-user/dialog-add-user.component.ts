@@ -2,7 +2,7 @@ import { Component, inject, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -58,7 +58,7 @@ export class DialogAddUserComponent {
 
   firestore: Firestore = inject(Firestore);
 
-  constructor() {
+  constructor(private dialogRef: MatDialogRef<DialogAddUserComponent>) {
     this.loading = false;
     this.users$ = collectionData(this.getUsersRef())
     this.users = this.users$.subscribe((user: any) => {
@@ -80,7 +80,12 @@ export class DialogAddUserComponent {
       console.error(err);
     } finally {
       this.loading = false;
+      this.dialogRef.close();
     }
+  }
+
+  closeCard() {
+    this.dialogRef.close();
   }
 }
 
