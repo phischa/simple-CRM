@@ -1,8 +1,8 @@
 <mat-card class="user-detail-header">
     <mat-card-content>
         <div class="user-detail-headline">
-            <h2>Max Mustermann</h2>
-            <p>email(at)email.de</p>
+            <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+            <p>{{ user.email }}</p>
         </div>
         <img src="assets/img/profile.png" alt="">
     </mat-card-content>
@@ -13,8 +13,8 @@
     </mat-card-header>
     <mat-card-content>
         <div>
-            Musterstraße 12,
-            12345 Musterstadt 
+            {{ user.address }}
+            {{ user.postalCode }} {{ user.city }}
         </div>
     </mat-card-content>
     <mat-card-header>
@@ -22,7 +22,7 @@
     </mat-card-header>
     <mat-card-content>
         <div>
-            1/1/1900 
+            {{ user.birthDate }} 
         </div>
     </mat-card-content>
 </mat-card>
