@@ -1,0 +1,30 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<h1 mat-dialog-title>Edit Name & Email<!-- {{data.name}} --></h1>
+<div class="mat-dialog-container">
+    <div class="mat-dialog-names">
+        <div class="first-name-field" mat-dialog-content>
+            <mat-form-field class="form" appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input [disabled]="loading" [(ngModel)]="user.firstName" matInput>
+            </mat-form-field>
+        </div>
+        <div class="last-name-field" mat-dialog-content>
+            <mat-form-field class="form" appearance="outline">
+                <mat-label> Last Name</mat-label>
+                <input [disabled]="loading" [(ngModel)]="user.lastName" matInput>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="padding-0-24">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>E-Mail</mat-label>
+                <input [disabled]="loading" [(ngModel)]="user.email" matInput>
+        </mat-form-field>
+    </div>
+
+</div>
+<div class="mat-dialog-actions" mat-dialog-actions>
+    <button [disabled]="loading" mat-button>Cancel</button>
+    <button [disabled]="loading" mat-button cdkFocusInitial>Save</button>
+</div>

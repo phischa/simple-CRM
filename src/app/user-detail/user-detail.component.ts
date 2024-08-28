@@ -1,15 +1,22 @@
 import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+
 import { ActivatedRoute } from '@angular/router';
 
 import { Firestore, doc, docData } from '@angular/fire/firestore';
 import { User } from '../../models/user.class';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
+import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
 
 @Component({
   selector: 'app-user-detail',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule],
+  imports: [MatCardModule, MatButtonModule, MatIconModule, MatDividerModule, MatMenuModule],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss'
 })
@@ -21,7 +28,10 @@ export class UserDetailComponent {
   firestore: Firestore = inject(Firestore);
 
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    public dialog: MatDialog, 
+    private route: ActivatedRoute) { }
+
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -37,6 +47,16 @@ export class UserDetailComponent {
       this.user = new User(user);
       console.log('Received user data from DB', this.user);
     });
+  }
+
+  editUser() {
+    const dialog = this.dialog.open(DialogEditUserComponent);
+    dialog.componentInstance.user = this.user;
+  }
+
+  editAddress() {
+    const dialog = this.dialog.open(DialogEditAddressComponent);
+    dialog.componentInstance.user = this.user;
   }
 }
 
