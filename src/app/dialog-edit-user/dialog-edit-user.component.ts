@@ -11,7 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, DateAdapter, NativeDateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
-import { Firestore, collection, collectionData, addDoc, onSnapshot } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, onSnapshot, updateDoc, doc } from '@angular/fire/firestore';
 import { User } from '../../models/user.class';
 
 @Component({
@@ -34,6 +34,7 @@ import { User } from '../../models/user.class';
 export class DialogEditUserComponent {
   user!: User;
   loading: boolean = false;
+  userId!: string;
 
   firestore: Firestore = inject(Firestore);
 
@@ -41,7 +42,25 @@ export class DialogEditUserComponent {
 
   }
 
-  saveUser() {
-    
+  async saveUser() {
+    this.loading = true;
+    try {
+      const userDocRef = doc(this.firestore, 'users', this.userId);
+      const updateData = this.getUpdatedData();
+      updateDoc(userDocRef, updateData);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      this.loading = false;
+      this.dialogRef.close();
+    }
+  }
+
+  getUpdatedData() {
+    return {
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      email: this.user.email
+    };
   }
 }
