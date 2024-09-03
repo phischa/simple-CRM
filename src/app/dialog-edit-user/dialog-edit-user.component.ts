@@ -36,4 +36,12 @@ export class DialogEditUserComponent {
   loading: boolean = false;
 
   firestore: Firestore = inject(Firestore);
+
+  constructor(public dialogRef: MatDialogRef<DialogEditUserComponent>) {
+
+  }
+
+  saveUser() {
+    
+  }
 }

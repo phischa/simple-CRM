@@ -37,5 +37,13 @@ export class DialogEditAddressComponent {
   loading: boolean = false;
 
   firestore: Firestore = inject(Firestore);
+
+  constructor(public dialogRef: MatDialogRef<DialogEditAddressComponent>) {
+
+  }
+
+  saveUser() {
+
+  }
 }
 
