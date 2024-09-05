@@ -13,6 +13,6 @@ import { UserComponent } from './user/user.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'simple-CRM';
+  /* title = 'simple-CRM'; */
   showFiller = false;
 }

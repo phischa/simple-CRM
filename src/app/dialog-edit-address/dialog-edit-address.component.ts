@@ -33,7 +33,7 @@ import { User } from '../../models/user.class';
   styleUrl: './dialog-edit-address.component.scss'
 })
 export class DialogEditAddressComponent {
-  user!: User;
+  user: User = new User();
   userId!: string;
   loading: boolean = false;
 

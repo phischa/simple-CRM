@@ -32,7 +32,7 @@ import { User } from '../../models/user.class';
   styleUrl: './dialog-edit-user.component.scss'
 })
 export class DialogEditUserComponent {
-  user!: User;
+  user: User = new User();
   loading: boolean = false;
   userId!: string;
 
