@@ -1,4 +1,4 @@
-import { Component, inject, NgModule } from '@angular/core';
+import { Component, inject, NgModule, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router'; 
@@ -25,13 +25,13 @@ export class UserComponent {
   users;
   users$: any;
   allUsers: User [] = [];
+  isWideScreen: boolean = true; 
 
   firestore: Firestore = inject(Firestore);
 
   constructor(public dialog: MatDialog, private router: Router) {
     this.users$ = collectionData(this.getUsersRef(), { idField: 'id' });
     this.users = this.users$.subscribe((changes: User []) => {
-      console.log('Received changes from DB', changes);
       this.allUsers = changes;
     });
   }
@@ -42,6 +42,15 @@ export class UserComponent {
 
   openDialog() {
     this.dialog.open(DialogAddUserComponent);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.checkScreenSize(); // Check screen size on resize
+  }
+
+  checkScreenSize() {
+    this.isWideScreen = window.innerWidth >= 500; 
   }
 
   /* navigateToUser(id: string) {

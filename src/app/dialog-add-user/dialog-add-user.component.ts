@@ -62,7 +62,7 @@ export class DialogAddUserComponent {
     this.loading = false;
     this.users$ = collectionData(this.getUsersRef())
     this.users = this.users$.subscribe((user: any) => {
-      console.log('user update', user);
+      console.warn('user update', user);
     });
   }
 
@@ -72,7 +72,6 @@ export class DialogAddUserComponent {
 
   async saveUser() {
     this.user.birthDate = this.birthDate.getTime();
-    console.log('Current user is: ', this.user);
     this.loading = true;
     try {
       await addDoc(this.getUsersRef(), this.user.toJSON());

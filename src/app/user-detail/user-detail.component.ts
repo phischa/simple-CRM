@@ -36,7 +36,6 @@ export class UserDetailComponent {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.UserId = params.get('id')!;
-      console.log('User ID', this.UserId);
       this.getUser();
     });
   };
@@ -45,7 +44,6 @@ export class UserDetailComponent {
     const userDocRef = doc(this.firestore, 'users', this.UserId); 
     docData(userDocRef).subscribe((user: any) => {
       this.user = new User(user);
-      console.log('Received user data from DB', this.user);
     });
   }
 

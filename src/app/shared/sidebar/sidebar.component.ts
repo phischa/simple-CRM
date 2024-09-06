@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener  } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { RouterLink } from '@angular/router';
@@ -16,4 +16,20 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class SidebarComponent {
   showFiller = false;
+  drawerOpened: boolean = true;
+  private readonly breakpoint: number = 1000; 
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.updateDrawerState();
+  }
+
+  ngOnInit() {
+    this.updateDrawerState();
+  }
+
+  private updateDrawerState() {
+    this.drawerOpened = window.innerWidth >= this.breakpoint;
+  }
 }
+
