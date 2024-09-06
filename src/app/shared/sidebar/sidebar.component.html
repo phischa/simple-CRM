@@ -7,11 +7,11 @@
             </button>
         </div>
         <ul>
-            <li routerLink="/dashboard" routerLinkActive="router-link-active">
+            <li routerLink="/dashboard" routerLinkActive="router-link-active" (click)="drawer.toggle()">
                 <mat-icon>space_dashboard</mat-icon>
                 <p class="icon-text">Dashboard</p>
             </li>
-            <li routerLink="/user" routerLinkActive="router-link-active">
+            <li routerLink="/user" routerLinkActive="router-link-active" (click)="drawer.toggle()">
                 <mat-icon>person_outline</mat-icon>
                 <p class="icon-text">User</p>
             </li>

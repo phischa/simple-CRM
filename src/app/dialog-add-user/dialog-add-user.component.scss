@@ -43,3 +43,37 @@
     padding-left: 24px;
     padding-bottom: 20px;
 }
+
+@media (max-width: 620px) {
+
+    h1 {
+        margin: 0;
+    }
+
+    mat-form-field {
+        width: 100%;
+    }
+
+    .last-name-field {
+        padding-left: 24px !important;
+    }
+
+    .form-field-postal {
+
+        .postal-code {
+            width: 100%;
+
+        }
+        .city {
+            width: 100%;
+            padding: 0 24px 0 24px;
+        }
+    }
+
+    .form-field-postal {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}
